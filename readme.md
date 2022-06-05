@@ -1,4 +1,4 @@
-UserInterface Functional Tests
+The Framework includes both UI and BackEnd tests
 
 Modules 
 
@@ -13,8 +13,6 @@ UtilityFactory - Used Factory Pattern for Driver Initialisation keeping scalabil
 --> BackEndFunctionalTest
 
 Models - POJO pattern for payload and response body
-
-Test Data - json files as testData
 
 Utility - JSON reading utility and transform responses as per data provider requirement for Data Driven tests
 
