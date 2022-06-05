@@ -4,6 +4,7 @@ import UserInterfaceFunctional.Utility.RetryFailed;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 import javax.annotation.Nullable;
 
@@ -13,6 +14,7 @@ import javax.annotation.Nullable;
 public class UserInterfaceFunctionalTest extends TestBase {
     private BankHomePage bankHomePage;
     WebDriver driver;
+    SoftAssert softAssert;
 
     @Nullable
     @BeforeSuite
@@ -20,6 +22,7 @@ public class UserInterfaceFunctionalTest extends TestBase {
         initialization("firefox");
         driver = getDriver();
         bankHomePage = new BankHomePage(driver);
+        softAssert = new SoftAssert();
     }
     @BeforeMethod
     public void quickReset(){
@@ -30,7 +33,7 @@ public class UserInterfaceFunctionalTest extends TestBase {
     public void validateCustomerEntryInList(String firstName,String lastName, String postCode){
         implicitWait(driver);
         String customerId = bankHomePage.clickOnBankManagerLogin().createCustomer(firstName,lastName,postCode).getId(driver);
-        Assert.assertEquals(customerId,"6");
+        softAssert.assertEquals(customerId,"6");
         String [] result = bankHomePage.searchRecordsByPostCode(driver, postCode, false);
         Assert.assertEquals(firstName,result[0]);
         Assert.assertEquals(lastName,result[1]);
@@ -45,12 +48,12 @@ public class UserInterfaceFunctionalTest extends TestBase {
         bankHomePage.clickOnProcess();
         String accountCreatedMessage = bankHomePage.getAccountMessage();
         String [] splitMessage = accountCreatedMessage.split(":");
-        Assert.assertTrue(accountCreatedMessage.startsWith(configProp.getProperty("accountMessage")));
+        softAssert.assertTrue(accountCreatedMessage.startsWith(configProp.getProperty("accountMessage")));
         String [] result = bankHomePage.searchRecordsByPostCode(driver,postCode, false);
-        Assert.assertEquals(firstName,result[0]);
-        Assert.assertEquals(lastName,result[1]);
-        Assert.assertEquals(postCode,result[2]);
-        Assert.assertEquals(splitMessage[1],result[3]);
+        softAssert.assertEquals(firstName,result[0]);
+        softAssert.assertEquals(lastName,result[1]);
+        softAssert.assertEquals(postCode,result[2]);
+        softAssert.assertEquals(splitMessage[1],result[3]);
         bankHomePage.searchRecordsByPostCode(driver,postCode, true);
         Assert.assertEquals(0,bankHomePage.getNoOfRowsVisible());
     }
