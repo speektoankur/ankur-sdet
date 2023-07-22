@@ -1,21 +1,18 @@
 package BackEndFunctional.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Root {
 
     public ArrayList<Shipment> shipments;
 
-    public Root(ArrayList<Shipment> shipments) {
-        this.shipments = shipments;
-    }
-
-    public ArrayList<Shipment> getShipments() {
-        return shipments;
-    }
-
-    public void setShipments(ArrayList<Shipment> shipments) {
-        this.shipments = shipments;
-    }
 }
 
