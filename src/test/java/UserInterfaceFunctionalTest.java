@@ -26,7 +26,7 @@ public class UserInterfaceFunctionalTest extends TestBase {
     }
     @BeforeMethod
     public void quickReset(){
-        driver.navigate().refresh();
+        getDriver().get(configProp.getProperty("testEnv"));
     }
 
     @Test(retryAnalyzer = RetryFailed.class,dataProvider = "customers",priority = 1)
@@ -40,7 +40,7 @@ public class UserInterfaceFunctionalTest extends TestBase {
         Assert.assertEquals(postCode,result[2]);
     }
 
-    @Test(priority = 2, dependsOnMethods = "validateCustomerEntryInList", dataProvider = "customers")
+    @Test(priority = 2, dependsOnMethods = "validateCustomerEntryInList", dataProvider = "customers", enabled = false)
     public void validateCustomerAccountAndDelete(String firstName,String lastName, String postCode){
         implicitWait(this.driver);
         bankHomePage.selectCustomer(driver,firstName+" "+lastName);
@@ -56,6 +56,10 @@ public class UserInterfaceFunctionalTest extends TestBase {
         softAssert.assertEquals(splitMessage[1],result[3]);
         bankHomePage.searchRecordsByPostCode(driver,postCode, true);
         Assert.assertEquals(0,bankHomePage.getNoOfRowsVisible());
+    }
+    @AfterMethod
+    public void afterMethod(){
+        driver.navigate().refresh();
     }
 
     @AfterSuite

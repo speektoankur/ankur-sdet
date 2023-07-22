@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "firstname": "TrellaFS",
+      "lastname": "TrellaLS",
+      "pincode": "151001"
+    },
+    {
+      "firstname": "John",
+      "lastname": "Hopkins",
+      "pincode": "151003"
+    },
+    {
+      "firstname": "Terry",
+      "lastname": "Jackson",
+      "pincode": "500084"
+    }
+  ]
+}

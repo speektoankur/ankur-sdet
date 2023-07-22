@@ -1,11 +1,17 @@
 package UserInterfaceFunctional.Utility;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+import org.openqa.selenium.json.Json;
 import org.testng.annotations.DataProvider;
+
+import java.io.IOException;
 
 /**
  * @author Ankur
  */
-public class TestDataUtility {
+public class TestDataUtility extends JSONFileReader{
     public static TestDataUtility DataConnection;
 
     public TestDataUtility() {
@@ -23,15 +29,23 @@ public class TestDataUtility {
     }
 
     /**
-     * Data Provider Test NG capability to modify data as accepted by Test Methods
-     * @return Test Data in 2D Matrix format for Test Customers Data
+     *
+     * @return DataProvider data array from JSON File
+     * @throws IOException
+     * @throws ParseException
      */
     @DataProvider(name = "customers")
-    public static Object[][] customersData() {
-        return new Object[][] {{"TrellaFS","TrellaLS","151001"}};
+    public static Object[][] testBankCustomer() throws IOException, ParseException {
+        JSONArray jsonArray = getData("testData.json");
+        Object [][] testData = new Object[jsonArray.size()][3];
+        for(int entry=0;entry<jsonArray.size();entry++){
+            JSONObject jsonObject = (JSONObject) jsonArray.get(entry);
+            testData[entry][0] = String.valueOf(jsonObject.get("firstname"));
+            testData[entry][1] = String.valueOf(jsonObject.get("lastname"));
+            testData[entry][2] = String.valueOf(jsonObject.get("pincode"));
+        }
+        return testData;
     }
-
-
 
 
 }
