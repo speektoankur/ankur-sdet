@@ -19,7 +19,7 @@ public class UserInterfaceFunctionalTest extends TestBase {
     @Nullable
     @BeforeSuite
     public void setUp() {
-        initialization("firefox");
+        initialization("chrome");
         driver = getDriver();
         bankHomePage = new BankHomePage(driver);
         softAssert = new SoftAssert();

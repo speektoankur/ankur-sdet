@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * Chrome Driver Instance
  * @author Ankur
  */
-public class ChromeDriverWebDriver extends DriverFactory {
+public class ChromeDriverWebDriver implements DriverFactory {
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     @Override
     public void initializeBrowser() {

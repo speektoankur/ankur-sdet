@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * Fire Fox Driver Instance
  * @author Ankur
  */
-public class FireFoxWebDriver extends DriverFactory {
+public class FireFoxWebDriver implements DriverFactory {
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     @Override

@@ -11,7 +11,7 @@ import java.net.URL;
 /**
  * Remote Chrome Web Driver for Docker
  */
-public class RemoteChromeDriver extends DriverFactory {
+public class RemoteChromeDriver implements DriverFactory {
     ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
     URL url;
     DesiredCapabilities desiredCapabilities;
