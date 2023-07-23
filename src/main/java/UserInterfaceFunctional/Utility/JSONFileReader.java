@@ -14,11 +14,11 @@ public class JSONFileReader {
     static JSONObject jsonObject;
 
     public static JSONArray getData(String fileName) throws IOException, ParseException {
-        dataObject = new JSONParser().parse(new FileReader("./src/main/testData/"+fileName));
+        dataObject = new JSONParser().parse(new FileReader("./src/main/testData/" + fileName));
         jsonObject = (JSONObject) dataObject;
         JSONArray jsonArray = (JSONArray) jsonObject.get("data");
         Iterator iterator = jsonArray.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
         return jsonArray;

@@ -13,6 +13,7 @@ public class RetryFailed implements IRetryAnalyzer {
 
     /**
      * Function to retry Failed test Cases as per maxRetry number of attempts
+     *
      * @param iTestResult
      * @return
      */

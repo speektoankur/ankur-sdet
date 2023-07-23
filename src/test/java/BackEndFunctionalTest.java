@@ -1,49 +1,33 @@
-
 import BackEndFunctional.Models.Root;
-import BackEndFunctional.Models.Shipment;
 import BackEndFunctional.Utility.TestBase;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.apache.http.HttpStatus;
 import org.junit.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.requestSpecification;
 
 /**
  * Backend Test
  */
 public class BackEndFunctionalTest extends TestBase {
 
-    @Test(dataProvider = "backendData", description = "Validating if at least one shipment available for queried vehicleType")
-    public void validateAtLeastOneShipmentWithVehicleType(int lon, int lat, String vehicleType){
-          Root response = given()
-                  .headers(headersHelper())
-                  .and()
-                  .queryParams(queryCoordinatesParamsHelper(lon,lat))
-                  .get("/marketplace")
-                  .as(Root.class);
-
-          ArrayList<Shipment> shipments = response.getShipments();
-          int consignments = 0;
-          for(Shipment shipment : shipments){
-              if(shipment.getVehicleType().contentEquals(vehicleType)){
-                  consignments++;
-              }
-          }
-          Assert.assertTrue(consignments>0);
-    }
-
-    @Test(dataProvider = "backendData", description = "Validating if at least one shipment available at queried coordinates")
-    public void validateIfLocationIsHavingShipments(int lon, int lat){
-        Root response = given()
-                .headers(headersHelper())
+    @Test(description = "Validating random results response")
+    public void validateRandomUserGetAPI() {
+        Response response = given()
+                .spec(getRequestSpecification())
                 .and()
-                .queryParams(queryCoordinatesParamsHelper(lon,lat))
-                .get("/marketplace")
-                .as(Root.class);
+                .get("/api")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract()
+                .response();
+        Root root = response.as(Root.class);
+        Assert.assertNotNull(root.getResults().get(0).getPicture().getThumbnail());
 
-        Assert.assertTrue(response.getShipments().size()!=0);
     }
-
-
 }

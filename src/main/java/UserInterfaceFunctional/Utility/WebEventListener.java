@@ -1,4 +1,5 @@
 package UserInterfaceFunctional.Utility;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,7 @@ import java.io.IOException;
  */
 public class WebEventListener implements WebDriverEventListener {
     TestBase testBase = new TestBase();
+
     public void beforeNavigateTo(String url, WebDriver driver) {
         Reporter.log("Before navigating to: '" + url + "'");
     }
