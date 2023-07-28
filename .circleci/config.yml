@@ -9,9 +9,6 @@ jobs:
     executor: java11-executor
     steps:
       - checkout  # Check out the code from the repository
-      - run:
-          name: Setup JDK 11
-          command: sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.11+9/bin/java
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
