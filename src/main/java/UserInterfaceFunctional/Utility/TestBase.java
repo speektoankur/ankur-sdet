@@ -3,6 +3,7 @@ package UserInterfaceFunctional.Utility;
 import UserInterfaceFunctional.UtilityFactory.ChromeDriverWebDriver;
 import UserInterfaceFunctional.UtilityFactory.FireFoxWebDriver;
 import UserInterfaceFunctional.UtilityFactory.RemoteChromeDriver;
+import UserInterfaceFunctional.UtilityFactory.RemoteFireFoxDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -23,11 +24,11 @@ public class TestBase extends TestDataUtility {
     public ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static Properties configProp;
     public EventFiringWebDriver e_driver;
-    public WebEventListener eventListener;
+//    public WebEventListener eventListener;
     public ChromeDriverWebDriver chrome;
     public FireFoxWebDriver firefox;
     public RemoteChromeDriver remoteChrome;
-
+    public RemoteFireFoxDriver remoteFirefox;
     public TestBase() {
         try {
             configProp = new Properties();
@@ -42,6 +43,8 @@ public class TestBase extends TestDataUtility {
             e.printStackTrace();
         }
     }
+
+
 
     /**
      * Returns Thread local driver instance set by initialisation() Function
@@ -75,14 +78,19 @@ public class TestBase extends TestDataUtility {
             firefox = new FireFoxWebDriver();
             firefox.initializeBrowser();
             setDriver(firefox.getDriverInstance());
-        } else if (browserName.equals("remote")) {
+        } else if (browserName.equals("chromeRemote")) {
             remoteChrome = new RemoteChromeDriver();
             remoteChrome.initializeBrowser();
             setDriver(remoteChrome.getDriverInstance());
         }
+        else if (browserName.equals("firefoxRemote")) {
+            remoteFirefox = new RemoteFireFoxDriver();
+            remoteFirefox.initializeBrowser();
+            setDriver(remoteFirefox.getDriverInstance());
+        }
         e_driver = new EventFiringWebDriver(getDriver());
-        eventListener = new WebEventListener();
-        e_driver.register(eventListener);
+        //eventListener = new WebEventListener();
+        //e_driver.register(eventListener);
         setDriver(e_driver);
         getDriver().manage().window().maximize();
         getDriver().manage().deleteAllCookies();
@@ -185,4 +193,25 @@ public class TestBase extends TestDataUtility {
         driver.switchTo().defaultContent();
     }
 
+    /**
+     * Get Properties from File
+     * @param filename
+     * @param value
+     * @return
+     */
+    public static String getProperty(String filename, String value){
+        try {
+            configProp = new Properties();
+            FileInputStream ip = new FileInputStream(System.getProperty("user.dir") + "/src/main/Properties"
+                    + "/"+filename);
+            try {
+                configProp.load(ip);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return configProp.getProperty(value);
+    }
 }

@@ -8,10 +8,7 @@ import org.testng.asserts.SoftAssert;
 
 import javax.annotation.Nullable;
 
-/**
- * UI Test
- */
-public class UserInterfaceFunctionalTest extends TestBase {
+public class UserInterfaceFireFoxTest extends TestBase {
     private BankHomePage bankHomePage;
     WebDriver driver;
     SoftAssert softAssert;

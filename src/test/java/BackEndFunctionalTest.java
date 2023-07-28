@@ -1,15 +1,12 @@
 import BackEndFunctional.Models.Root;
 import BackEndFunctional.Utility.TestBase;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.requestSpecification;
 
 /**
  * Backend Test
@@ -27,6 +24,7 @@ public class BackEndFunctionalTest extends TestBase {
                 .extract()
                 .response();
         Root root = response.as(Root.class);
+        Reporter.log(response.prettyPrint());
         Assert.assertNotNull(root.getResults().get(0).getPicture().getThumbnail());
 
     }
