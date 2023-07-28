@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: selenium/standalone-chrome
       - image: cimg/openjdk:11.0
-      - image: maven
+      - image: adoptopenjdk/maven-openjdk11
     steps:
       - checkout
       - run: java --version
