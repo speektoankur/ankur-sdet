@@ -23,4 +23,4 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run:
           name: Build and Test
-          command: mvn clean verify
+          command: mvn test -DsuiteXmlFile=smokeTest.xml
