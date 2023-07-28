@@ -9,7 +9,6 @@ jobs:
     steps:
       - checkout
       - run: java --version
-      - run: mvn --version
       - run: mvn clean test -DsuiteXmlFile=smokeTest.xml
 
 
