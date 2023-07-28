@@ -4,11 +4,14 @@ jobs:
   build:
     docker:
       - image: selenium/standalone-chrome
-      - image: adoptopenjdk/maven-openjdk11
+      - image: cimg/openjdk:11.0
     steps:
       - checkout
-      - run: java --version
-      - run: mvn --version
+      - run: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn test -DsuiteXmlFile=smokeTest.xml
 
 
