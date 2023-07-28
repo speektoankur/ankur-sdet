@@ -4,11 +4,12 @@ jobs:
   build:
     docker:
       - image: selenium/standalone-chrome
-      - image: cimg/openjdk:11-jdk
+      - image: cimg/openjdk:11.0
       - image: cimg/maven@0.0.12
     steps:
       - checkout
-      - run: echo "This is Hybdrid Framework Env"
+      - run: java --version
+      - run: mvn --version
       - run: mvn clean test -DsuiteXmlFile=smokeTest.xml
 
 
