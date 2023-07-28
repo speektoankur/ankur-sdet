@@ -6,14 +6,10 @@ jobs:
   build:
     docker:
       - image: selenium/standalone-chrome
+      - image: circleci/openjdk:11-jdk
     steps:
       - checkout
       - run: echo "This is Hybdrid Framework Env"
+      - run: mvn clean test -DsuiteXmlFile=smokeTest.xml
 
-workflows:
-  build_and_test:
-    jobs:
-      - build
-      - test: mvn clean test -DsuiteXmlFile=smokeTest.xml
-          requires:
-            - build
+
