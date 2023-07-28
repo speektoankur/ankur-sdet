@@ -3,7 +3,7 @@ executors:
   java11-executor:
     docker:
       - image: cimg/openjdk:11.0.0
-
+      - image: selenium/standalone-chrome
 jobs:
   build:
     executor: java11-executor
