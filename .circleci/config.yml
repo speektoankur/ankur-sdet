@@ -8,7 +8,8 @@ jobs:
       - image: cimg/openjdk:11.0
     steps:
       - checkout
+      - run: apt-get install maven
       - run: java --version
-      - run: maven/test -DsuiteXmlFile=smokeTest.xml
+      - run: mvn test -DsuiteXmlFile=smokeTest.xml
 
 
