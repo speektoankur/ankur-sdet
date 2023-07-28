@@ -6,9 +6,9 @@ jobs:
     docker:
       - image: selenium/standalone-chrome
       - image: cimg/openjdk:11.0
+      - image: maven
     steps:
       - checkout
-      - run: apt-get install maven
       - run: java --version
       - run: mvn test -DsuiteXmlFile=smokeTest.xml
 
