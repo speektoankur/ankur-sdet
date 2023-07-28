@@ -1,15 +1,29 @@
 version: 2.1
+executors:
+  java11-executor:
+    docker:
+      - image: circleci/openjdk:11-jdk
 
 jobs:
   build:
-    docker:
-      - image: selenium/standalone-chrome
-      - image: cimg/openjdk:11.0.0
-    working_directory: ~/repo
-    environment:
-      MAVEN_OPTS: -Xmx3200m
+    executor: java11-executor
     steps:
-      - checkout
-      - run: mvn clean test
-
-
+      - checkout  # Check out the code from the repository
+      - run:
+          name: Setup JDK 11
+          command: sudo update-alternatives --set java /usr/lib/jvm/jdk-11.0.11+9/bin/java
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Download Dependencies
+          command: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - run:
+          name: Build and Test
+          command: mvn clean verify
