@@ -28,6 +28,6 @@ jobs:
           name: Checking File
           command: ls 
       - store_test_results:
-          path: ./target/surefire-reports/emailable-report.html
+          path: ./hybrid-framework/target/surefire-reports/emailable-report.html
 
         
