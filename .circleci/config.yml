@@ -25,6 +25,6 @@ jobs:
           name: Build and Test
           command: mvn test -DsuiteXmlFile=smokeTest.xml
       - store_test_results:
-          path: /target/surefire-reports/emailable-report.html
+          path: ./target/surefire-reports/emailable-report.html
 
         
