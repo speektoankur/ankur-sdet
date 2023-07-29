@@ -17,6 +17,9 @@ jobs:
       - run:
           name: Download Dependencies
           command: mvn dependency:go-offline
+      - run: 
+          name: Install Chrome
+          command: apt-get update && apt-get install -y google-chrome-stable
       - save_cache:
           paths:
             - ~/.m2
