@@ -26,7 +26,7 @@ jobs:
           command: mvn test -DsuiteXmlFile=smokeTest.xml
       - run: 
           name: Checking File
-          command: pwd
+          command: ls 
       - store_test_results:
           path: ./target/surefire-reports/emailable-report.html
 
