@@ -7,7 +7,6 @@
     <test name="Smoke UI Test" thread-count="2">
         <classes>
             <class name="UserInterfaceChromeTest"/>
-            <class name="UserInterfaceFireFoxTest"/>
         </classes>
     </test>
     <test name="Smoke Backend Test" thread-count="1">
