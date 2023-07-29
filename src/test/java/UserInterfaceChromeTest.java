@@ -19,7 +19,7 @@ public class UserInterfaceChromeTest extends TestBase {
     @Nullable
     @BeforeSuite
     public void setUp() {
-        initialization("chrome");
+        initialization("chromeRemote");
         driver = getDriver();
         bankHomePage = new BankHomePage(driver);
         softAssert = new SoftAssert();
