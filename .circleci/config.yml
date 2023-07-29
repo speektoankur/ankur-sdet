@@ -26,7 +26,7 @@ jobs:
           command: mvn test -DsuiteXmlFile=smokeTest.xml
       - run: 
           name: Checking File
-          command: ls 
+          command: pwd 
       - run:
           name: Creating Dummy Artifacts
           command: |
