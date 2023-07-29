@@ -27,8 +27,7 @@ jobs:
       - run: 
           name: Checking File
           command: 
-            cd target 
-            ls  
+            cd target & ls
       - run:
           name: Creating Artifacts folder
           command: |
