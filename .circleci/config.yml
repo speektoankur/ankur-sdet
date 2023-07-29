@@ -33,7 +33,7 @@ jobs:
           command: |
             mkdir /tmp/artifacts;
       - store_artifacts:
-          path: /target/surefire-reports
+          path: /target/surefire-reports/
           destination: /tmp/artifacts
 
         
