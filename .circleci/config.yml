@@ -27,7 +27,7 @@ jobs:
       - run: 
           name: Checking File
           command: 
-            cd target & ls
+            ls target/surefire-reports/
       - run:
           name: Creating Artifacts folder
           command: |
