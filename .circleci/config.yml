@@ -7,6 +7,7 @@ executors:
 jobs:
   build:
     executor: java11-executor
+    working_directory: /tmp
     steps:
       - checkout  # Check out the code from the repository
       - restore_cache:
@@ -27,11 +28,9 @@ jobs:
       - run:
           name: Creating Artifacts folder
           command: mkdir /tmp/artifacts
-      - run: 
-          name: Checking File
-          command: 
-            cp /target/surefire-reports/ /tmp/artifacts
-      
-      
+      - store_artifacts:
+          path: target/
+          destination: /tmp/artifacts
+
 
         
