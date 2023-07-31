@@ -26,12 +26,11 @@ jobs:
           command: mvn test -DsuiteXmlFile=smokeTest.xml
       - run:
           name: Creating Artifacts folder
-          command: |
-            mkdir /tmp/artifacts
+          command: mkdir /tmp/artifacts
       - run: 
           name: Checking File
           command: 
-            cp target/surefire-reports/ /tmp/artifacts
+            cp /target/surefire-reports/ /tmp/artifacts
       
       
 
